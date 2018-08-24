@@ -1,0 +1,15 @@
+#!/bin/bash
+#帧缓冲设备对应的设备文件是/Dev/fb*
+readelf test -h ##查看elf格式可执行文件信息
+readelf -S elf ##查看段信息
+ps -eLo ruser,lwp,psr,args |grep pid #查看进程所属cpu
+arm-linux-as #编译汇编文件，产生目标文件，供连接器ld连接
+arm-linux-ld -T ld.lds #连接多个文件代码段，数据段，bss段到一个文件中
+nm ##列出目标文件中的符号。
+arm-linux-objcopy ##把一种目标文件中的内容复制到另一种类型的目标文件中
+arm-linux-objdump ##显示一个或者多个目标文件的信息
+ldd or readelf #查看elf文件依赖的动态链接库,ldd不能跨平台
+cat /etc/issue #查看linux发行版
+uname -a #查看内核版本
+gcc -v #查看gcc版本
+cat /etc/ld.so.conf #查看默认共享库搜索路径 文件尾添加ldconfig 刷新共享库缓存
